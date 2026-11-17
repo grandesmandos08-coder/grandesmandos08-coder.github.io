@@ -1,9 +1,702 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Developer Site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Developer Site | Aplicaciones Android</title>
+
+    <meta name="description"
+          content="Sitio oficial de desarrollo de aplicaciones Android. Conoce nuestras aplicaciones, consulta las políticas de privacidad y encuentra soporte.">
+
+    <meta name="theme-color" content="#101827">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f6fb;
+            color: #17243a;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            background: #101827;
+            color: white;
+            border-bottom: 1px solid #263449;
+        }
+
+        nav {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 1.15rem;
+            font-weight: bold;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: #60a5fa;
+            color: #101827;
+            font-size: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: #d4deeb;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* PORTADA */
+
+        .hero {
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    #24466b 0,
+                    transparent 36%
+                ),
+                #101827;
+            color: white;
+            padding: 100px 0 110px;
+        }
+
+        .hero-content {
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 14px;
+            margin-bottom: 22px;
+            border: 1px solid #42648a;
+            border-radius: 30px;
+            color: #93c5fd;
+            font-size: 0.82rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.12;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: #60a5fa;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #c4d0e0;
+            font-size: 1.12rem;
+            margin-bottom: 32px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: #60a5fa;
+            color: #101827;
+        }
+
+        .button-secondary {
+            border: 1px solid #62758e;
+            color: white;
+            margin-left: 10px;
+        }
+
+        /* SECCIONES */
+
+        section {
+            padding: 76px 0;
+            scroll-margin-top: 20px;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 42px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+        }
+
+        /* TARJETAS DE APLICACIONES */
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .app-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 28px #17243a08;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px #17243a12;
+        }
+
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .app-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .app-card p {
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .text-link {
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ACERCA DE */
+
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
+            align-items: start;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 18px;
+        }
+
+        .about p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .feature {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .feature-icon {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            background: #d1fae5;
+            border-radius: 12px;
+            font-size: 22px;
+        }
+
+        .feature h3 {
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* PRIVACIDAD Y CONTACTO */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 28px;
+            border-radius: 16px;
+        }
+
+        .info-card .symbol {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            background: #101827;
+            color: #c4d0e0;
+            padding: 35px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        footer a {
+            color: #93c5fd;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer small {
+            display: block;
+            margin-top: 16px;
+            color: #94a3b8;
+        }
+
+        /* MÓVILES */
+
+        @media (max-width: 650px) {
+            nav {
+                padding: 18px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 70px 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .button {
+                margin: 5px 5px 5px 0;
+            }
+
+            section {
+                padding: 55px 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Developer Site</h1>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#inicio" class="brand">
+                    <span class="brand-icon">📱</span>
+                    <span>Sitio del Desarrollador: Grandes Mandos</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#aplicaciones">Aplicaciones</a>
+                    <a href="#nosotros">Acerca de</a>
+                    <a href="https://grandesmandos.blogspot.com/2022/10/politica-de-privacidad.html">Privacidad</a>
+                    <a href="mailto:grandesmandos08@gmail.com">Contacto</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PORTADA -->
+        <section class="hero" id="inicio">
+            <div class="container">
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        DESARROLLO DE APLICACIONES MÓVILES
+                    </span>
+
+                    <h1>
+                        Tecnología útil
+                        <span>para policías.</span>
+                    </h1>
+
+                    <p>
+                        Creamos aplicaciones móviles pensadas para
+                        facilitar tareas, ofrecer herramientas
+                        prácticas y hacer que la labor policial sea
+                        más sencilla y accesible.
+                    </p>
+
+                    <a href="#aplicaciones"
+                       class="button button-primary">
+                        Explorar aplicaciones →
+                    </a>
+
+                    <a href="#nosotros"
+                       class="button button-secondary">
+                        Conócenos
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- APLICACIONES -->
+        <section id="aplicaciones">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h2>Nuestras aplicaciones</h2>
+                    <p>
+                        Descubre nuestras herramientas digitales
+                        diseñadas para ofrecer una experiencia
+                        práctica, clara y fácil de utilizar.
+                    </p>
+                </div>
+
+                <div class="apps-grid">
+
+                    <article class="app-card">
+                        <div class="app-icon">📄</div>
+
+                        <h3>Cadena de Custodia</h3>
+
+                        <p>
+                            Cadena de Custodia Móvil es una aplicación dedicada 
+                            a todos los integrantes de instituciones de Seguridad Pública 
+                            en todo el país, que facilita sus labores mediante el uso de la 
+                            tecnología en cuanto a la digitalización del Registro de Cadena 
+                            de Custodia utilizado en México.
+                        </p>
+
+                        <!-- Sustituye # por el enlace real de Google Play -->
+                        <a class="text-link"
+                           href="https://play.google.com/store/apps/details?id=com.cadenadecustodia"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Ver en Google Play →
+                        </a>
+                    </article>
+
+                    <article class="app-card">
+                        <div class="app-icon">🔎</div>
+
+                        <h3>Registro Nacional de Detenciones</h3>
+
+                        <p>
+                           Registro Nacional de Detenciones es una aplicación 
+                           desarrollada únicamente con fines de capacitación y 
+                           simulación académica. El formato disponible para 
+                           descarga es un modelo de práctica y no constituye 
+                           un documento oficial ni sustituye sistemas institucionales reales.
+                        </p>
+
+                        <!-- Sustituye # por el enlace real de Google Play -->
+                        <a class="text-link"
+                           href="https://play.google.com/store/apps/details?id=com.registronacionaldedetenciones"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Ver en Google Play →
+                        </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ACERCA DE -->
+        <section class="about" id="nosotros">
+            <div class="container">
+                <div class="about-grid">
+
+                    <div>
+                        <h2>Desarrollamos tecnología
+                            con un propósito.</h2>
+
+                        <p>
+                            Nuestro objetivo es crear aplicaciones
+                            para facilitar la labor policial.
+                        </p>
+
+                        <p>
+                            Trabajamos para mejorar la experiencia
+                            de nuestros usuarios mediante
+                            herramientas digitales y mejoras
+                            continuas.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="feature">
+                            <div class="feature-icon">💡</div>
+                            <div>
+                                <h3>Soluciones prácticas</h3>
+                                <p>
+                                    Funcionalidades pensadas para
+                                    necesidades concretas.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <div class="feature-icon">📲</div>
+                            <div>
+                                <h3>Experiencia sencilla</h3>
+                                <p>
+                                    Interfaces claras y herramientas
+                                    fáciles de utilizar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <div class="feature-icon">🔒</div>
+                            <div>
+                                <h3>Transparencia</h3>
+                                <p>
+                                    Información clara sobre las
+                                    aplicaciones y sus políticas
+                                    de privacidad.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACIDAD Y CONTACTO -->
+        <section id="privacidad">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h2>Información y soporte</h2>
+                    <p>
+                        Consulta información importante sobre
+                        nuestras aplicaciones y encuentra
+                        opciones de ayuda.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <article class="info-card">
+                        <div class="symbol">🛡️</div>
+                        <h3>Política de privacidad</h3>
+
+                        <p>
+                            Conoce cómo se trata la información
+                            y qué prácticas de privacidad se
+                            aplican al utilizar nuestras apps.
+                        </p>
+
+                        <!-- Cambia privacidad.html por tu archivo real -->
+                        <a class="text-link"
+                           href="https://grandesmandos.blogspot.com/2022/10/politica-de-privacidad.html">
+                            Consultar política →
+                        </a>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="symbol">💬</div>
+                        <h3>Ayuda y soporte</h3>
+
+                        <p>
+                            ¿Tienes dudas, encontraste un problema
+                            o quieres compartir una sugerencia?
+                            Ponte en contacto con nosotros.
+                        </p>
+
+                        <a class="text-link"
+                           href="mailto:grandesmandos08@gmail.com">
+                            Contactar →
+                        </a>
+                    </article>
+
+                    <article class="info-card">
+                        <div class="symbol">📋</div>
+                        <h3>Información del desarrollador</h3>
+
+                        <p>
+                            Consulta información sobre nuestras
+                            aplicaciones, sus funciones y
+                            los enlaces oficiales disponibles.
+                        </p>
+
+                        <a class="text-link"
+                           href="https://grandesmandos08-coder.github.io/">
+                            Ver aplicaciones →
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="about">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Estamos para ayudarte</h2>
+
+                    <p>
+                        Para consultas, sugerencias o problemas
+                        relacionados con nuestras aplicaciones,
+                        puedes escribirnos por correo electrónico.
+                    </p>
+
+                    <!-- Sustituye por tu correo real -->
+                    <a class="button button-primary"
+                       href="mailto:grandesmandos08@gmail.com">
+                        ✉ Enviar un correo a grandesmandos08@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <div class="container">
+
+            <div class="footer-content">
+                <div>
+                    <strong>Developer Site</strong>
+                    <div>Aplicaciones y soluciones digitales.</div>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#aplicaciones">Aplicaciones</a>
+                    <a href="https://grandesmandos.blogspot.com/2022/10/politica-de-privacidad.html">Privacidad</a>
+                    <a href="mailto:grandesmandos08@gmail.com">Contacto</a>
+                </div>
+            </div>
+
+            <small>
+                © <span id="year">2026</span>
+                Developer Site. Todos los derechos reservados.
+            </small>
+
+            <small>
+                Las aplicaciones de este sitio son independientes
+                de las entidades gubernamentales, salvo que se
+                indique expresamente lo contrario.
+            </small>
+
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
 </body>
 </html>
